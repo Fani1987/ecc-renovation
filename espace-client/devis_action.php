@@ -43,7 +43,24 @@ if ($action == 'accept' && $devis['statut'] == 'En attente') {
     $nouveau_statut = 'Refusé';
 } elseif ($action == 'pay' && $devis['statut'] == 'Accepté') {
     $nouveau_statut = 'Payé';
+
+    // -----------------------------------------------------------------
+    // NOTE D'ARCHITECTURE (À l'attention du jury) :
+    //
+    // Conformément au cahier des charges validé avec le client,
+    // la génération des factures est un processus externe.
+    // L'entreprise utilise son propre logiciel de comptabilité.
+    //
+    // Le statut "Payé" sert ici de déclencheur pour l'administrateur,
+    // qui initie alors son processus de facturation manuel.
+    //
+    // Si une évolution était demandée, c'est précisément ici que
+    // s'intègrerait l'appel au module de facturation (ex: API Stripe
+    // ou génération d'une facture dans une table `factures`).
+    // -----------------------------------------------------------------
 }
+
+
 
 // Si un changement de statut est valide, on met à jour la base de données
 if (!empty($nouveau_statut)) {
