@@ -1,0 +1,73 @@
+// 1. Variables et configuration
+@import 'variables';
+
+// 2. Styles de base (reset, typographie, etc.)
+@import 'base';
+
+// 3. Composants réutilisables
+@import 'components/buttons';
+@import 'components/header';
+@import 'components/footer';
+@import 'components/tables';
+@import 'components/forms';
+@import 'components/cards';
+
+// 4. Styles spécifiques aux pages
+@import 'pages/home';
+@import 'pages/login';
+@import 'pages/client-area';
+
+// 5. Responsive design
+@media (max-width: 992px) {
+    .portfolio-grid {
+         column-count: 2;
+    }
+}
+
+@media (max-width: 768px) {
+    h2 { font-size: 2rem; }
+    
+    .nav-links {
+        position: fixed; right: 0px; top: 0px; height: 100vh; background-color: $primary-blue;
+        display: flex; flex-direction: column; align-items: center; justify-content: space-around;
+        width: 60%; transform: translateX(100%); transition: transform 0.5s ease-in; padding: 2rem 0;
+        &.nav-active { transform: translateX(0%); }
+        li { margin: 0; }
+        a { color: $white; font-size: 1.2rem; }
+    }
+    .burger { display: block; position: fixed; top: 20px; right: 20px; z-index: 1001; }
+    .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); background-color: $white; }
+    .toggle .line2 { opacity: 0; }
+    .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); background-color: $white; }
+
+    .hero h1 { font-size: 2.5rem; }
+    .hero p { font-size: 1rem; }
+
+    .about-content { flex-direction: column; }
+
+    .table-wrapper {
+        overflow-x: hidden;
+        table { border: 0; min-width: 100%; }
+        thead {
+            border: none; clip: rect(0 0 0 0); height: 1px; margin: -1px;
+            overflow: hidden; padding: 0; position: absolute; width: 1px;
+        }
+        tr {
+            display: block; margin-bottom: 20px; border-radius: 8px;
+            box-shadow: $shadow; border: 1px solid $border-color;
+        }
+        td {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 15px; border-bottom: 1px solid #ddd;
+            &::before {
+                content: attr(data-label); font-weight: bold; padding-right: 15px;
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .portfolio-grid {
+        column-count: 1;
+    }
+}

@@ -1,0 +1,23 @@
+.welcome-banner {
+    padding: 2rem 0;
+    background-color: $light-blue-bg;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.statut-enattente {
+    color: #f39c12;
+}
+
+.statut-accepte {
+    color: #27ae60;
+}
+
+.statut-paye {
+    color: #2980b9;
+    font-weight: bold;
+}
+
+.statut-refuse {
+    color: #c0392b;
+}

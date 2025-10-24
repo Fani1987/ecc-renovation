@@ -1,0 +1,96 @@
+.hero {
+    background: linear-gradient(rgba(10, 61, 98, 0.7), rgba(10, 61, 98, 0.7)), url('/Images/pexels-blue-bird-7218525.jpg') no-repeat center center/cover;
+    color: $text-light;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    .hero-content {
+        max-width: 800px;
+    }
+    h1 {
+        color: $text-light;
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+    }
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+}
+
+#services {
+    background-color: $light-blue-bg;
+}
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+.service-card {
+    background-color: $white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: $shadow;
+    transition: transform 0.3s ease;
+    &:hover {
+        transform: translateY(-10px);
+    }
+    i {
+        font-size: 3rem;
+        color: $secondary-blue;
+        margin-bottom: 1rem;
+    }
+    h3 {
+        font-size: 1.4rem;
+    }
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+.about-text, .about-image {
+    flex: 1;
+}
+.about-image img {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 8px;
+    box-shadow: $shadow;
+}
+
+#portfolio {
+    background-color: $light-blue-bg;
+}
+.portfolio-grid {
+    column-count: 3;
+    column-gap: 20px;
+}
+.portfolio-item {
+    margin-bottom: 20px;
+    break-inside: avoid;
+    img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: $shadow;
+    }
+}
+
+.contact-info {
+    text-align: center;
+    margin-top: 40px;
+    p {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    i {
+        color: $secondary-blue;
+        margin-right: 10px;
+    }
+}

@@ -1,0 +1,51 @@
+.header {
+    background-color: $white;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    max-height: 50px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    li {
+        margin-left: 25px;
+    }
+    a {
+        text-decoration: none;
+        color: $secondary-blue;
+        font-weight: 600;
+        transition: color 0.3s ease;
+        &:hover {
+            color: $primary-blue;
+        }
+    }
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+    div {
+        width: 25px;
+        height: 3px;
+        background-color: $primary-blue;
+        margin: 5px;
+        transition: all 0.3s ease;
+    }
+}

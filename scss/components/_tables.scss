@@ -1,0 +1,43 @@
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    background-color: $white;
+    box-shadow: $shadow;
+    border-radius: 8px;
+    overflow: hidden;
+    th, td {
+        padding: 15px;
+        border-bottom: 1px solid $border-color;
+        text-align: left;
+        vertical-align: middle;
+    }
+    th {
+        background-color: $secondary-blue;
+        color: $white;
+    }
+    .thumbnail {
+        max-width: 100px;
+        height: auto;
+        border-radius: 4px;
+    }
+}
+
+td.actions {
+    .btn-action {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: $secondary-blue;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-right: 10px;
+        &:hover {
+            background-color: $primary-blue;
+        }
+    }
+}
