@@ -2,6 +2,7 @@
     <div class="container">
         <p>&copy; <?php echo date('Y'); ?> ECC Rénovation. Tous droits réservés.</p>
         <p style="margin-top: 10px; font-size: 0.8rem;">
+            <a href="/mentions-legales.php" style="color: #aaa; text-decoration: none; margin-right: 15px;">Mentions Légales</a>
             <a href="/admin/index.php" style="color: #aaa; text-decoration: none;">Administration</a>
         </p>
     </div>
