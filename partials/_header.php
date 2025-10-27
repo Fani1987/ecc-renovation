@@ -56,7 +56,7 @@ session_start();
                     <li><a href="/index.php#about">À Propos</a></li>
                     <li><a href="/index.php#portfolio">Nos Réalisations</a></li>
                     <li><a href="/index.php#contact">Contact</a></li>
-                    <li><a href="/espace-client/index.php" class="btn">Espace Client</a></li>
+                    <li><a href="/espace-client/index.php">Espace Client</a></li>
                 </ul>
             <?php endif; ?>
 
