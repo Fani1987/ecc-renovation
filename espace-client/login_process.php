@@ -1,6 +1,8 @@
 <?php
-session_start();
-require_once '../config/database.php'; // On utilise notre fichier de connexion central
+// 1. Démarrer la session
+require_once '../partials/_session_start.php';
+// 2. Connexion à la base de données
+require_once '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];

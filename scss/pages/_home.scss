@@ -74,11 +74,50 @@
 .portfolio-item {
     margin-bottom: 20px;
     break-inside: avoid;
+    position: relative; // Nécessaire pour positionner l'overlay
+    border-radius: 8px; // Appliquer le radius au conteneur
+    overflow: hidden; // Cacher ce qui dépasse (l'overlay)
+    box-shadow: $shadow;
+
     img {
         width: 100%;
         height: auto;
-        border-radius: 8px;
-        box-shadow: $shadow;
+        display: block; // Empêche les petits espaces sous l'image
+    }
+
+    // Styles pour notre nouvel overlay
+    .portfolio-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        // Utilise la couleur primaire en semi-transparent
+        background-color: rgba($primary-blue, 0.7); 
+        color: $white;
+
+        // Centrage du titre
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+
+        // Effet d'apparition
+        opacity: 0;
+        transition: opacity 0.4s ease;
+
+        h3 {
+            color: $white; // S'assurer que le titre est blanc
+            font-size: 1.2rem;
+            margin: 0;
+        }
+    }
+
+    // Au survol du portfolio-item, on affiche l'overlay
+    &:hover .portfolio-overlay {
+        opacity: 1;
     }
 }
 

@@ -1,5 +1,7 @@
 <?php
-session_start();
+// 1. Démarrer la session
+require_once '../partials/_session_start.php';
+// 2. Connexion à la base de données
 require_once '../config/database.php';
 
 // Gardien de sécurité : client connecté
@@ -59,8 +61,6 @@ if ($action == 'accept' && $devis['statut'] == 'En attente') {
     // ou génération d'une facture dans une table `factures`).
     // -----------------------------------------------------------------
 }
-
-
 
 // Si un changement de statut est valide, on met à jour la base de données
 if (!empty($nouveau_statut)) {

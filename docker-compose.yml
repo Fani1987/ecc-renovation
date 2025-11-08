@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # 1. Le service "app" (PHP + Apache)
+  app:
+    build: ./docker/php  # Construit l'image à partir de notre Dockerfile
+    container_name: ecc_app
+    ports:
+      - "80:80"        # Lie le port 80 de ta machine au port 80 du conteneur
+    volumes:
+      - ./:/var/www/html # Lie ton code projet au dossier du serveur Apache
+    depends_on:
+      - db-sql
+      - db-nosql
+  
+  # 2. Le service "db-sql" (MySQL)
+  db-sql:
+    image: mysql:8.0
+    container_name: ecc_db_sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} # Lit le mot de passe depuis le fichier .env
+      MYSQL_DATABASE: ${DB_NAME}         # Crée la BDD automatiquement
+    volumes:
+      - ./docker-data/mysql:/var/lib/mysql # Sauvegarde les données de MySQL ici
+    ports:
+      - "3306:3306" # Expose le port MySQL sur la machine
+  
+  # 3. Le service "db-nosql" (MongoDB)
+  db-nosql:
+    image: mongo:latest
+    container_name: ecc_db_nosql
+    restart: always
+    volumes:
+      - ./docker-data/mongo:/data/db # Sauvegarde les données de MongoDB ici
+    ports:
+      - "27017:27017" # Expose le port MongoDB sur la machine
+
+volumes:
+  docker-data-mysql:
+  docker-data-mongo:

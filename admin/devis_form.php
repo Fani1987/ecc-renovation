@@ -1,5 +1,8 @@
-<?php require_once '../partials/_header.php'; ?>
 <?php
+// 1. DÉMARRER LA SESSION
+require_once '../partials/_session_start.php';
+
+// 2. CONNEXION À LA BASE DE DONNÉES
 require_once '../config/database.php';
 
 // Le gardien de sécurité
@@ -15,6 +18,9 @@ $selected_client_id = isset($_GET['client_id']) ? intval($_GET['client_id']) : 0
 $result = $conn->query("SELECT id, nom_complet FROM clients ORDER BY nom_complet ASC");
 $clients = $result->fetch_all(MYSQLI_ASSOC);
 $conn->close();
+
+// 3. INCLURE L'EN-TÊTE HTML
+require_once '../partials/_header.php';
 ?>
 
 <main class="container">

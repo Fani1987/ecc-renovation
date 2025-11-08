@@ -1,11 +1,17 @@
-<?php require_once '../partials/_header.php'; ?>
 <?php
+// 1. DÉMARRER LA SESSION
+require_once '../partials/_session_start.php';
+
+// 2. CONNEXION À LA BASE DE DONNÉES
 require_once '../config/database.php';
+
+// Le gardien de sécurité
 if (!isset($_SESSION['admin_id'])) {
     header('Location: index.php');
     exit();
 }
 
+// Récupération des données
 $sql = "SELECT id, titre, chemin_image FROM projets ORDER BY date_creation DESC";
 $result = $conn->query($sql);
 
@@ -16,23 +22,17 @@ if ($result->num_rows > 0) {
     }
 }
 $conn->close();
-$admin_nom = $_SESSION['admin_nom'];
+$admin_nom = $_SESSION['admin_nom']; // Nécessaire pour le header
+
+// 3. INCLURE L'EN-TÊTE HTML
+require_once '../partials/_header.php';
 ?>
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Gérer les Réalisations</title>
-    <link rel="stylesheet" href="../css/admin.min.css">
-</head>
+<main class="container">
+    <h2>Gérer les Réalisations</h2>
+    <a href="projet_form.php" class="btn" style="margin-bottom: 20px; display: inline-block;">Ajouter une nouvelle réalisation</a>
 
-<body>
-
-    <main class="table-wrapper">
-        <h2>Gérer les Réalisations</h2>
-        <a href="projet_form.php" class="add-button">Ajouter une nouvelle réalisation</a>
-
+    <div class="table-wrapper">
         <table>
             <thead>
                 <tr>
@@ -53,5 +53,7 @@ $admin_nom = $_SESSION['admin_nom'];
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </main>
-    <?php require_once '../partials/_footer.php'; ?>
+    </div>
+</main>
+
+<?php require_once '../partials/_footer.php'; ?>

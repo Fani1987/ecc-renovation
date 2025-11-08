@@ -1,5 +1,7 @@
 <?php
-session_start();
+// 1. DÉMARRER LA SESSION
+require_once '../partials/_session_start.php';
+// 2. CONNEXION À LA BASE DE DONNÉES
 require_once '../config/database.php';
 
 if (!isset($_SESSION['admin_id'])) {

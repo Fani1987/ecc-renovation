@@ -1,6 +1,8 @@
-<?php require_once '../partials/_header.php'; ?>
 <?php
-// Le gardien de sécurité
+// 1. DÉMARRER LA SESSION
+require_once '../partials/_session_start.php';
+
+// 2.Le gardien de sécurité
 if (!isset($_SESSION['admin_id'])) {
     header('Location: index.php');
     exit();
@@ -9,6 +11,9 @@ if (!isset($_SESSION['admin_id'])) {
 // On vérifie si des informations sont passées dans l'URL pour pré-remplir les champs
 $nom_predetermine = isset($_GET['nom']) ? htmlspecialchars(urldecode($_GET['nom'])) : '';
 $email_predetermine = isset($_GET['email']) ? htmlspecialchars(urldecode($_GET['email'])) : '';
+
+// 3. INCLURE L'EN-TÊTE HTML
+require_once '../partials/_header.php';
 ?>
 
 <main class="container">

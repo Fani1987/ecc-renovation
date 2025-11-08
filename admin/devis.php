@@ -1,5 +1,8 @@
-<?php require_once '../partials/_header.php'; ?>
 <?php
+// 1. DÉMARRER LA SESSION
+require_once '../partials/_session_start.php';
+
+// 2. CONNEXION À LA BASE DE DONNÉES
 require_once '../config/database.php';
 
 // Le gardien de sécurité
@@ -22,6 +25,9 @@ $sql = "SELECT
 $result = $conn->query($sql);
 $devis = $result->fetch_all(MYSQLI_ASSOC);
 $conn->close();
+
+// 3. INCLURE L'EN-TÊTE HTML
+require_once '../partials/_header.php';
 ?>
 
 <main class="container">
@@ -50,7 +56,7 @@ $conn->close();
                             <td data-label="Titre du projet"><?php echo htmlspecialchars($item['titre']); ?></td>
                             <td data-label="Montant"><?php echo number_format($item['montant_total'], 2, ',', ' '); ?> €</td>
                             <td data-label="Statut" class="statut-<?php echo strtolower(str_replace(' ', '', $item['statut'])); ?>">
-                                <strong><?php echo htmlspecialchars($item['statut']); ?></strong>
+                                <strong><?php echo htmlspecialchars(ucfirst($item['statut'])); ?></strong>
                             </td>
                         </tr>
                     <?php endforeach; ?>

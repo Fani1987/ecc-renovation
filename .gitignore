@@ -1,2 +1,8 @@
-# Fichier d'environnement local - NE PAS PUBLIER
+# Ignorer les variables d'environnement sensibles
 .env
+
+# Ignorer les dossiers de dépendances
+/vendor/
+
+# Ignorer les données des bases de données Docker (TRÈS IMPORTANT)
+/docker-data/

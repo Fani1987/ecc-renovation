@@ -1,5 +1,6 @@
 <?php
-session_start();
+// DÉMARRER LA SESSION
+require_once '../partials/_session_start.php';
 
 // On détruit toutes les variables de session
 $_SESSION = array();

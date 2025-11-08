@@ -1,13 +1,14 @@
 <?php
-session_start();
+// 1. DÉMARRER LA SESSION
+require_once '../partials/_session_start.php';
+// 2. CONNEXION À LA BASE DE DONNÉES
 require_once '../config/database.php';
-// Gardien de sécurité pour s'assurer que l'administrateur est connecté
+
+// Gardien de sécurité
 if (!isset($_SESSION['admin_id'])) {
     header('HTTP/1.1 403 Forbidden');
     exit();
 }
-
-
 
 // --- GESTION DE L'AJOUT D'UN PROJET ---
 if (isset($_POST['action']) && $_POST['action'] == 'add') {
@@ -19,10 +20,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'add') {
     }
 
     // Gestion de l'upload de l'image
-    $target_dir = "../Images/"; // Le dossier où stocker les images
-    $image_name = uniqid() . '_' . basename($_FILES["image"]["name"]); // Crée un nom de fichier unique
+    $target_dir = "../Images/";
+    $image_name = uniqid() . '_' . basename($_FILES["image"]["name"]);
     $target_file = $target_dir . $image_name;
-    $image_path_for_db = "/Images/" . $image_name; // Chemin à stocker en BDD
+    $image_path_for_db = "/Images/" . $image_name;
 
     // Déplacer le fichier uploadé
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
@@ -43,7 +44,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'add') {
 
 // --- GESTION DE LA SUPPRESSION D'UN PROJET ---
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-    $id = intval($_GET['id']); // Sécurité : on s'assure que l'ID est un entier
+    $id = intval($_GET['id']);
 
     // 1. Récupérer le chemin de l'image avant de supprimer l'entrée BDD
     $sql_select = "SELECT chemin_image FROM projets WHERE id = ?";

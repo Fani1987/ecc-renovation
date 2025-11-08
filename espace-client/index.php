@@ -1,5 +1,6 @@
 <?php
-session_start();
+// Démarrer la session
+require_once '../partials/_session_start.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">

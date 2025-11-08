@@ -1,23 +1,12 @@
 <?php
+// On charge la connexion MongoDB et l'autoloader de Composer
+require_once '../config/mongodb.php';
+
 // On indique que la réponse sera du JSON
 header('Content-Type: application/json');
 
 // On vérifie que la méthode de requête est bien POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    // --- CONNEXION À LA BASE DE DONNÉES ---
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "ecc_renovation";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        // En cas d'erreur de connexion, on envoie une réponse d'erreur
-        echo json_encode(['success' => false, 'message' => 'Erreur de connexion à la base de données.']);
-        exit(); // On arrête le script
-    }
 
     // --- SÉCURITÉ : RÉCUPÉRATION ET NETTOYAGE DES DONNÉES ---
     $nom = trim($_POST['name']);
@@ -34,26 +23,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    // --- PRÉPARATION DE LA REQUÊTE POUR ÉVITER LES INJECTIONS SQL ---
-    $sql = "INSERT INTO demandes_contact (nom, email, message) VALUES (?, ?, ?)";
+    // --- INSERTION DANS MONGODB ---
+    try {
+        // On insère un "document" dans la collection
+        $insertResult = $collectionMessages->insertOne([
+            'nom' => $nom,
+            'email' => $email,
+            'message' => $message,
+            'date_soumission' => new MongoDB\BSON\UTCDateTime(), // Format de date NoSQL
+            'statut' => 'nouveau'
+        ]);
 
-    // On prépare la requête
-    $stmt = $conn->prepare($sql);
-
-    // On lie les variables aux marqueurs '?' en spécifiant leur type ('s' pour string)
-    // C'est l'étape cruciale pour la sécurité !
-    $stmt->bind_param("sss", $nom, $email, $message);
-
-    // On exécute la requête et on vérifie le résultat
-    if ($stmt->execute()) {
-        echo json_encode(['success' => true, 'message' => 'Votre message a bien été envoyé. Nous vous répondrons rapidement !']);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Une erreur est survenue. Veuillez réessayer.']);
+        // On vérifie si l'insertion a réussi
+        if ($insertResult->getInsertedCount() === 1) {
+            echo json_encode(['success' => true, 'message' => 'Votre message a bien été envoyé. Nous vous répondrons rapidement !']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Une erreur est survenue lors de l\'enregistrement.']);
+        }
+    } catch (Exception $e) {
+        // Gère les erreurs de connexion ou d'insertion
+        echo json_encode(['success' => false, 'message' => 'Erreur de base de données NoSQL : ' . $e->getMessage()]);
     }
-
-    // On ferme le statement et la connexion
-    $stmt->close();
-    $conn->close();
 } else {
     // Si la méthode n'est pas POST, on renvoie une erreur
     echo json_encode(['success' => false, 'message' => 'Méthode non autorisée.']);

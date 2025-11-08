@@ -1,5 +1,6 @@
 <?php
-session_start(); // On démarre la session pour pouvoir afficher les messages d'erreur
+// 1. DÉMARRER LA SESSION
+require_once '../partials/_session_start.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">

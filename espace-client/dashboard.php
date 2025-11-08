@@ -1,5 +1,8 @@
-<?php require_once '../partials/_header.php'; ?>
 <?php
+// 1. DÉMARRER LA SESSION
+require_once '../partials/_session_start.php';
+
+// 2. CONNEXION À LA BASE DE DONNÉES
 require_once '../config/database.php';
 
 // Le gardien de sécurité
@@ -21,6 +24,9 @@ $result = $stmt->get_result();
 $devis = $result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 $conn->close();
+
+// 3. INCLURE L'EN-TÊTE HTML
+require_once '../partials/_header.php';
 ?>
 
 <main>
