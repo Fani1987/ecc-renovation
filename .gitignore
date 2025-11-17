@@ -6,3 +6,8 @@
 
 # Ignorer les données des bases de données Docker (TRÈS IMPORTANT)
 /docker-data/
+
+# Fichiers de documentation et livrables (stockés dans les Releases)
+*.pdf
+*.docx
+*.pptx
